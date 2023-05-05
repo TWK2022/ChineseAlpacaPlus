@@ -18,5 +18,7 @@ google网盘(外网):https://drive.google.com/uc?id=1N97m3rBj-rp-J1X8rgRfluyomEs
 google网盘(外网):https://drive.google.com/uc?id=1EDcTmq6tDmRxqarpapdyDGBE9opY0zrB&export=download
 
 5,merge_model.py:合并llama_7b_hf、chinese_llama_plus_lora_7b、chinese_alpaca_plus_lora_7b
-python merge_model.py --base_model /TRAINING_CACHE/llama_7b_hf --lora_model /TRAINING_CACHE/chinese_llama_plus_lora_7b,/TRAINING_CACHE/chinese_alpaca_plus_lora_7b --output_type huggingface --output_dir /TRAINING_CACHE/chinese_alpaca_plus_7b
+python merge_model.py --base_model /TRAINING_CACHE/llama_7b_hf --lora_model /TRAINING_CACHE/chinese_llama_plus_lora_7b,/TRAINING_CACHE/chinese_alpaca_plus_lora_7b --output_type huggingface --output_dir /TRAINING_CACHE/chinese_alpaca_plus_7b_hf
 
+6,inference_hf.py:启动模型
+python inference_hf.py --base_model chinese_alpaca_plus_7b_hf --with_prompt --interactive
