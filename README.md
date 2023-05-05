@@ -6,7 +6,7 @@
 ## Chinese-Alpaca-Plus-7B介绍
 >类似GPT一样有对话交互能力的大型语言模型  
 >2022年facebook发布的LLaMA-7B模型，此后中文团队训练出中文模型补丁  
->中文模型只是部分权重，原LLaMA-7B、Chinese-LLaMA-Plus-7B、Chinese-Alpaca-Plus-7B要合并后才可使用  
+>中文模型只是部分权重，原LLaMA-7B模型、Chinese-LLaMA-Plus-7B补丁、Chinese-Alpaca-Plus-7B补丁要合并后才可使用  
 ### 项目介绍
 >本项目记录了在服务器上部署Chinese-Alpaca-Plus-7B模型的流程  
 ### 1，环境:linux
@@ -22,8 +22,8 @@
 >百度网盘：https://pan.baidu.com/s/1zvyX9FN-WSRDdrtMARxxfw?pwd=2gtr  
 >google网盘(外网)：https://drive.google.com/uc?id=1N97m3rBj-rp-J1X8rgRfluyomEscfAq0&export=download  
 ### 4，下载chinese_alpaca_plus_lora_7b
->百度网盘:https://pan.baidu.com/s/12tjjxmDWwLBM8Tj_7FAjHg?login_type=qzone&pwd=32hc&_at_=1683274834793  
->google网盘(外网):https://drive.google.com/uc?id=1EDcTmq6tDmRxqarpapdyDGBE9opY0zrB&export=download  
+>百度网盘：https://pan.baidu.com/s/12tjjxmDWwLBM8Tj_7FAjHg?login_type=qzone&pwd=32hc&_at_=1683274834793  
+>google网盘(外网)：https://drive.google.com/uc?id=1EDcTmq6tDmRxqarpapdyDGBE9opY0zrB&export=download  
 ### 5，merge_model.py
 >合并llama_7b_hf、chinese_llama_plus_lora_7b、chinese_alpaca_plus_lora_7b  
 >python merge_model.py --base_model /TRAINING_CACHE/llama_7b_hf --lora_model /TRAINING_CACHE/chinese_llama_plus_lora_7b，/TRAINING_CACHE/chinese_alpaca_plus_lora_7b --output_type huggingface --output_dir /TRAINING_CACHE/chinese_alpaca_plus_7b_hf  
