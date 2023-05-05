@@ -9,10 +9,14 @@ pip install git+https://github.com/huggingface/peft
 将tokenizer.model放到input_dir中，其余文件放入input_dir/model_size中，转换后保存在output_dir
 python llama_to_hf.py  --input_dir /TRAINING_CACHE/llama --model_size 7b --output_dir /TRAINING_CACHE/llama_7b_hf
 
-3,下载chinese_alpaca_plus_lora_7b
+3,下载chinese_llama_plus_lora_7b
+百度网盘:https://pan.baidu.com/s/1zvyX9FN-WSRDdrtMARxxfw?pwd=2gtr
+google网盘(外网):https://drive.google.com/uc?id=1N97m3rBj-rp-J1X8rgRfluyomEscfAq0&export=download
+
+4,下载chinese_alpaca_plus_lora_7b
 百度网盘:https://pan.baidu.com/s/12tjjxmDWwLBM8Tj_7FAjHg?login_type=qzone&pwd=32hc&_at_=1683274834793
 google网盘(外网):https://drive.google.com/uc?id=1EDcTmq6tDmRxqarpapdyDGBE9opY0zrB&export=download
 
-4,merge_model.py:合并模型
-python merge_model.py --base_model /TRAINING_CACHE/llama_7b_hf  --lora_model /TRAINING_CACHE/chinese_alpaca_plus_lora_7b  --output_type huggingface --output_dir chinese_alpaca_plus_7b
+5,merge_model.py:合并llama_7b_hf、chinese_llama_plus_lora_7b、chinese_alpaca_plus_lora_7b
+python merge_model.py --base_model /TRAINING_CACHE/llama_7b_hf --lora_model /TRAINING_CACHE/chinese_llama_plus_lora_7b,/TRAINING_CACHE/chinese_alpaca_plus_lora_7b --output_type huggingface --output_dir /TRAINING_CACHE/chinese_alpaca_plus_7b
 
