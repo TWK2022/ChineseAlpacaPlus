@@ -1,7 +1,7 @@
 # 快速在服务器上部署大型语言对话模型(类似GPT)
 >基于Chinese-Alpaca-Plus-7B官方项目改编:https://github.com/ymcui/Chinese-LLaMA-Alpaca  
 >官方项目中除了Chinese-Alpaca-Plus-7B外还有多种型号  
->需要手动下载官方原LLaMA、Chinese-LLaMA-Plus-7B、Chinese-Alpaca-Plus-7B(共约28G)  
+>需要手动下载官方原LLaMA-7B(25G)、Chinese-LLaMA-Plus-7B(790M)、Chinese-Alpaca-Plus-7B(1.1G)(共约27G)  
 >如在CPU上运行要有32GB内存；如在GPU上运行要有20GB内存  
 ## Chinese-Alpaca-Plus-7B介绍
 >类似GPT一样有对话交互能力的大型语言模型  
