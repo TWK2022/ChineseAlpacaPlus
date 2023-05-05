@@ -5,7 +5,7 @@
 >如在CPU上运行要有32GB内存；如在GPU上运行要有20GB内存  
 ## Chinese-Alpaca-Plus-7B介绍
 >类似GPT一样有对话交互能力的大型语言模型  
->2022年facebook发布的LLaMA-7B模型，此后中文团队训练出中文模型补丁  
+>2022年facebook发布LLaMA-7B模型，此后中文团队训练出中文模型补丁  
 >中文模型只是部分权重，原LLaMA-7B模型、Chinese-LLaMA-Plus-7B补丁、Chinese-Alpaca-Plus-7B补丁要合并后才可使用  
 ### 项目介绍
 >本项目记录了在服务器上部署Chinese-Alpaca-Plus-7B模型的流程  
