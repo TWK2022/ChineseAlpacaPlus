@@ -57,9 +57,8 @@
 >```
 >读取文件：  
 >```
->python inference_hf.py --base_model /TRAINING_CACHE/chinese_alpaca_plus_7b_hf --with_prompt --data_file data.txt --predictions_file result.txt  
+>python inference_hf.py --base_model /TRAINING_CACHE/chinese_alpaca_plus_7b_hf --with_prompt --data_file data.txt  
 >--data_file：待预测数据，按行读取  
->--predictions_file：存放预测结果  
 >```
 ### 其他
 >github链接：https://github.com/TWK2022/ChineseAlpacaPlus7b  

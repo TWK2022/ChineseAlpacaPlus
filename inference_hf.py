@@ -12,7 +12,6 @@ parser.add_argument('--data_file', default=None, type=str,
                     help="file that contains instructions (one instruction per line).")
 parser.add_argument('--with_prompt', action='store_true')
 parser.add_argument('--interactive', action='store_true')
-parser.add_argument('--predictions_file', default='./predictions.json', type=str)
 args = parser.parse_args()
 
 generation_config = dict(
@@ -143,8 +142,9 @@ if __name__ == '__main__':
                 print(f"======={index}=======")
                 print(f"Input: {example}\n")
                 print(f"Output: {response}\n")
-                results.append({"Input": input_text, "Output": response})
-            with open(args.predictions_file, 'w') as f:
-                json.dump(results, f, ensure_ascii=False, indent=2)
-            with open('generation_config.json', 'w') as f:
+                results.append({"input": input_text, "output": response})
+            with open('result.txt', 'w') as f:
+                line_all = [_['output'] for _ in results]
+                f.writelines(line_all)
+            with open('result.json', 'w') as f:
                 json.dump(generation_config, f, ensure_ascii=False, indent=2)
