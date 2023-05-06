@@ -144,7 +144,7 @@ if __name__ == '__main__':
                 print(f"Output: {response}\n")
                 results.append({"input": input_text, "output": response})
             with open('result.txt', 'w') as f:
-                line_all = [_['output'] + '\n' for _ in results]
+                line_all = ['。'.join(_['output'].split('\n')) + '\n' for _ in results]
                 f.writelines(line_all)
             with open('result.json', 'w') as f:
                 json.dump(generation_config, f, ensure_ascii=False, indent=2)
