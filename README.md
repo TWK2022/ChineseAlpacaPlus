@@ -11,13 +11,24 @@
 >本项目记录了在服务器上部署Chinese-Alpaca-Plus-7B模型的流程  
 ### 1，环境:linux
 >torch==1.12.0：https://pytorch.org/get-started/previous-versions/  
+>```
 >pip install transformers sentencepiece -i https://pypi.doubanio.com/simple  
 >pip install git+https://github.com/huggingface/peft  
+>```
 ### 2，llama_to_hf.py
->将llama_7b模型转为HuggingFace格式(或者直接下载已经转好的llama_7b_hf模型：https://www.123pan.com/s/sKd9-bBJc.html)  
+>将llama_7b模型转为HuggingFace格式(或者直接下载已经转好的llama_7b_hf模型)  
 >下载facebook官方llama_7b模型，包含tokenizer.model、tokenizer_checklist.chk、consolidated.*.pth、params.json  
 >将tokenizer.model放到input_dir中，其余文件放入input_dir/model_size中，转换后保存在output_dir  
+>```
 >python llama_to_hf.py  --input_dir /TRAINING_CACHE/llama --model_size 7b --output_dir /TRAINING_CACHE/llama_7b_hf  
+>```
+### *，llama_to_hf.py
+>huggingface地址：https://huggingface.co/decapoda-research/llama-7b-hf/tree/main  
+>```
+>sudo apt-get install git-lfs：安装git lfs  
+>git lfs install：启用lfs。不使用lfs无法下载大文件  
+>git clone https://huggingface.co/decapoda-research/llama-7b-hf：克隆项目  
+>```
 ### 3，下载chinese_llama_plus_lora_7b
 >百度网盘：https://pan.baidu.com/s/1zvyX9FN-WSRDdrtMARxxfw?pwd=2gtr  
 >google网盘(外网)：https://drive.google.com/uc?id=1N97m3rBj-rp-J1X8rgRfluyomEscfAq0&export=download  
@@ -26,10 +37,14 @@
 >google网盘(外网)：https://drive.google.com/uc?id=1EDcTmq6tDmRxqarpapdyDGBE9opY0zrB&export=download  
 ### 5，merge_model.py
 >合并llama_7b_hf、chinese_llama_plus_lora_7b、chinese_alpaca_plus_lora_7b  
->python merge_model.py --base_model /TRAINING_CACHE/llama_7b_hf --lora_model /TRAINING_CACHE/chinese_llama_plus_lora_7b，/TRAINING_CACHE/chinese_alpaca_plus_lora_7b --output_type huggingface --output_dir /TRAINING_CACHE/chinese_alpaca_plus_7b_hf  
+>```
+>python merge_model.py --base_model /TRAINING_CACHE/llama_7b_hf --lora_model /TRAINING_CACHE/chinese_llama_plus_lora_7b,/TRAINING_CACHE/chinese_alpaca_plus_lora_7b --output_type huggingface --output_dir /TRAINING_CACHE/chinese_alpaca_plus_7b_hf  
+>```
 ### 6，inference_hf.py
 >启动模型  
+>```
 >python inference_hf.py --base_model chinese_alpaca_plus_7b_hf --with_prompt --interactive  
+>```
 ### 其他
 >github链接：https://github.com/TWK2022/ChineseAlpacaPlus7b  
 >学习笔记：https://github.com/TWK2022/notebook  

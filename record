@@ -13,7 +13,7 @@ python llama_to_hf.py  --input_dir /TRAINING_CACHE/llama --model_size 7b --outpu
 huggingface地址：https://huggingface.co/decapoda-research/llama-7b-hf/tree/main
 sudo apt-get install git-lfs：安装git lfs
 git lfs install：启用lfs。不使用lfs无法下载大文件
-git clone https://huggingface.co/...：克隆项目
+git clone https://huggingface.co/decapoda-research/llama-7b-hf：克隆项目
 
 3，下载chinese_llama_plus_lora_7b
 百度网盘：https://pan.baidu.com/s/1zvyX9FN-WSRDdrtMARxxfw?pwd=2gtr
