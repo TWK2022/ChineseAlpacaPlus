@@ -7,7 +7,7 @@
 >2022年facebook发布LLaMA-7B模型，此后中文团队训练出中文模型补丁  
 >中文模型只是部分权重，原LLaMA-7B模型、Chinese-LLaMA-Plus-7B补丁、Chinese-Alpaca-Plus-7B补丁要合并后才可使用  
 ### 项目介绍
->本项目记录了在服务器上部署Chinese-Alpaca-Plus-7B模型的流程  
+>本项目记录了在Linux上部署Chinese-Alpaca-Plus-7B模型的流程  
 >如果直接下载合并好的chinese_alpaca_plus_7b_hf模型(推荐)，可直接使用模型，详见(*，直接下载chinese_alpaca_plus_7b_hf)  
 ### 1，环境：linux
 >torch==1.12.0：https://pytorch.org/get-started/previous-versions/  
