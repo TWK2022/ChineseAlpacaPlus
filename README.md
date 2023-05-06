@@ -1,7 +1,8 @@
 # 快速在服务器上部署大型语言对话模型(类似GPT)
 >基于Chinese-Alpaca-Plus-7B官方项目改编：https://github.com/ymcui/Chinese-LLaMA-Alpaca  
 >官方项目中除了Chinese-Alpaca-Plus-7B外还有多种型号  
->需要手动下载官方原LLaMA-7B(25G)、Chinese-LLaMA-Plus-7B(790M)、Chinese-Alpaca-Plus-7B(1.1G)(共约27G)  
+>需要手动下载官方llama_7b_hf(13G)、chinese_llama_plus_lora_7b(790M)、chinese_alpaca_plus_lora_7b(1.1G)(共约15G)  
+>合成后的模型chinese_alpaca_plus_7b_hf(13G)，建议预留30G存储空间  
 >如在CPU上运行要有32GB内存；如在GPU上运行要有20GB内存  
 ## Chinese-Alpaca-Plus-7B介绍
 >类似GPT一样有对话交互能力的大型语言模型  
@@ -40,10 +41,11 @@
 >```
 >python merge_model.py --base_model /TRAINING_CACHE/llama_7b_hf --lora_model /TRAINING_CACHE/chinese_llama_plus_lora_7b,/TRAINING_CACHE/chinese_alpaca_plus_lora_7b --output_type huggingface --output_dir /TRAINING_CACHE/chinese_alpaca_plus_7b_hf  
 >```
+>如果内存不够可使用缓存，命令中加上缓存路径```--offload_dir cache```  
 ### 6，inference_hf.py
 >启动模型  
 >```
->python inference_hf.py --base_model chinese_alpaca_plus_7b_hf --with_prompt --interactive  
+>python inference_hf.py --base_model /TRAINING_CACHE/chinese_alpaca_plus_7b_hf --with_prompt --interactive  
 >```
 ### 其他
 >github链接：https://github.com/TWK2022/ChineseAlpacaPlus7b  
