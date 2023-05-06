@@ -12,15 +12,15 @@
 ### 1，环境：linux
 >torch==1.12.0：https://pytorch.org/get-started/previous-versions/  
 >```
->pip install transformers sentencepiece -i https://pypi.doubanio.com/simple  
->pip install git+https://github.com/huggingface/peft  
+>pip install transformers sentencepiece -i https://pypi.doubanio.com/simple
+>pip install git+https://github.com/huggingface/peft
 >```
 ### 2，下载llama_hf(13G)
 >huggingface地址：https://huggingface.co/decapoda-research/llama-7b-hf/tree/main  
 >```
->sudo apt-get install git-lfs：安装git lfs  
->git lfs install：启用lfs。不使用lfs无法下载大文件  
->git clone https://huggingface.co/decapoda-research/llama-7b-hf：下载模型  
+>sudo apt-get install git-lfs：安装git lfs
+>git lfs install：启用lfs。不使用lfs无法下载大文件
+>git clone https://huggingface.co/decapoda-research/llama-7b-hf：下载模型
 >```
 ### 3，下载chinese_llama_plus_lora_7b(790M)
 >百度网盘：https://pan.baidu.com/s/1zvyX9FN-WSRDdrtMARxxfw?pwd=2gtr  
@@ -31,27 +31,27 @@
 ### 5，merge_model.py
 >合并llama_7b_hf、chinese_llama_plus_lora_7b、chinese_alpaca_plus_lora_7b为chinese_alpaca_plus_7b_hf(14G)  
 >```
->python merge_model.py --base_model /TRAINING_CACHE/llama_7b_hf --lora_model /TRAINING_CACHE/chinese_llama_plus_lora_7b,/TRAINING_CACHE/chinese_alpaca_plus_lora_7b --output_type huggingface --output_dir /TRAINING_CACHE/chinese_alpaca_plus_7b_hf  
->--offload_dir cache：如果内存不够可使用缓存，命令中加上缓存路径  
+>python merge_model.py --base_model /TRAINING_CACHE/llama_7b_hf --lora_model /TRAINING_CACHE/chinese_llama_plus_lora_7b,/TRAINING_CACHE/chinese_alpaca_plus_lora_7b --output_type huggingface --output_dir /TRAINING_CACHE/chinese_alpaca_plus_7b_hf
+>--offload_dir cache：如果内存不够可使用缓存，命令中加上缓存路径
 >```
 ### *，直接下载chinese_alpaca_plus_7b_hf
 >使用huggingface上别人合并好上传的chinese_alpaca_plus_7b_hf模型，若不能使用，可以再找找其他的  
 >huggingface地址：https://huggingface.co/shibing624/chinese-alpaca-plus-7b/tree/main  
 >```
->sudo apt-get install git-lfs：安装git lfs  
->git lfs install：启用lfs。不使用lfs无法下载大文件  
->git clone https://huggingface.co/shibing624/chinese-alpaca-plus-7b：下载模型  
+>sudo apt-get install git-lfs：安装git lfs
+>git lfs install：启用lfs。不使用lfs无法下载大文件
+>git clone https://huggingface.co/shibing624/chinese-alpaca-plus-7b：下载模型
 >```
 ### 6，inference_hf.py
 >启动模型(不具备记忆功能)  
 >交互式：  
 >```
->python inference_hf.py --base_model /TRAINING_CACHE/chinese_alpaca_plus_7b_hf --with_prompt --interactive  
+>python inference_hf.py --base_model /TRAINING_CACHE/chinese_alpaca_plus_7b_hf --with_prompt --interactive
 >```
 >读取文本式：  
 >```
->python inference_hf.py --base_model /TRAINING_CACHE/chinese_alpaca_plus_7b_hf --with_prompt --data_file data.txt  
->--data_file：待预测数据，按行读取  
+>python inference_hf.py --base_model /TRAINING_CACHE/chinese_alpaca_plus_7b_hf --with_prompt --data_file data.txt
+>--data_file：待预测数据，按行读取
 >```
 ### 更多模型和功能
 >请参考原项目：https://github.com/ymcui/Chinese-LLaMA-Alpaca  
