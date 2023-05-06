@@ -143,11 +143,8 @@ if __name__ == '__main__':
                 print(f"======={index}=======")
                 print(f"Input: {example}\n")
                 print(f"Output: {response}\n")
-
                 results.append({"Input": input_text, "Output": response})
-            dirname = os.path.dirname(args.predictions_file)
-            os.makedirs(dirname) if not os.path.exists(dirname) else None
             with open(args.predictions_file, 'w') as f:
                 json.dump(results, f, ensure_ascii=False, indent=2)
-            with open(dirname + '/generation_config.json', 'w') as f:
+            with open('generation_config.json', 'w') as f:
                 json.dump(generation_config, f, ensure_ascii=False, indent=2)
