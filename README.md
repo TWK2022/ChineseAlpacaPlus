@@ -42,11 +42,12 @@
 >如果内存不够可使用缓存，命令中加上缓存路径：--offload_dir cache
 >```
 ### *，直接下载chinese_alpaca_plus_7b_hf
->huggingface地址：https://huggingface.co/models?sort=downloads&search=Chinese-Alpaca-Plus-7B
+>使用huggingface上别人已经合并好的chinese_alpaca_plus_7b_hf  
+>huggingface地址：https://huggingface.co/shibing624/chinese-alpaca-plus-7b/tree/main  
 >```
 >sudo apt-get install git-lfs：安装git lfs  
 >git lfs install：启用lfs。不使用lfs无法下载大文件  
->git clone https://huggingface.co/...：下载模型  
+>git clone https://huggingface.co/shibing624/chinese-alpaca-plus-7b：下载模型  
 >```
 ### 6，inference_hf.py
 >启动模型(不具备记忆功能)  
