@@ -43,7 +43,7 @@
 >git clone https://huggingface.co/shibing624/chinese-alpaca-plus-7b：下载模型
 >```
 ### 6，inference_hf.py
->启动模型(不具备记忆功能)  
+>启动模型  
 >交互式：  
 >```
 >python inference_hf.py --base_model /TRAINING_CACHE/chinese_alpaca_plus_7b_hf --with_prompt --interactive
