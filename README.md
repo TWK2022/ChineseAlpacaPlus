@@ -16,7 +16,7 @@
 >pip install git+https://github.com/huggingface/peft  
 >```
 ### 2，llama_to_hf.py
->将llama_7b模型转为HuggingFace格式(或者直接下载已经转好的llama_7b_hf模型)  
+>将llama_7b模型转为HuggingFace格式(推荐直接下载已经转好的llama_7b_hf模型，详见*，llama_to_hf.py)  
 >下载facebook官方llama_7b模型，包含tokenizer.model、tokenizer_checklist.chk、consolidated.*.pth、params.json  
 >将tokenizer.model放到input_dir中，其余文件放入input_dir/model_size中，转换后保存在output_dir  
 >```
