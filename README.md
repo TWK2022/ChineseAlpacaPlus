@@ -1,4 +1,4 @@
-# 快速在Linux上部署大型中文对话模型(类似GPT)
+## 快速在Linux上部署大型中文对话模型(类似GPT)
 >基于Chinese-Alpaca-Plus-7B官方项目改编：https://github.com/ymcui/Chinese-LLaMA-Alpaca  
 >官方项目中除了Chinese-Alpaca-Plus-7B(14G)外还有多种型号  
 >CPU上运行要有32G内存；GPU上运行要有20G内存  
