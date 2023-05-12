@@ -1,11 +1,3 @@
-"""
-Usage:
-python merge_llama_with_chinese_lora.py \
-    --base_model path/to/llama/model \
-    --lora_model path/to/first/lora/model [path/to/second/lora/model] \
-    --output_type [pth|huggingface] \
-    --output_dir path/to/output/dir
-"""
 import argparse
 import json
 import os
@@ -27,7 +19,6 @@ parser.add_argument('--offload_dir', default=None, type=str,
 parser.add_argument('--output_type', default='pth', choices=['pth', 'huggingface'], type=str,
                     help="save the merged model in pth or huggingface format.")
 parser.add_argument('--output_dir', default='./', type=str)
-
 emb_to_model_size = {
     4096: '7B',
     5120: '13B',
@@ -147,8 +138,6 @@ def save_shards(model_sd, num_shards: int):
                     elif 'attention_norm.weight' in new_k:
                         print(f"Processing {new_k}")
                         splits = [v] * num_shards
-
-
                     elif 'w1.weight' in new_k:
                         print(f"Processing {new_k}")
                         splits = v.split(v.size(0) // num_shards, dim=0)
@@ -158,16 +147,12 @@ def save_shards(model_sd, num_shards: int):
                     elif 'w3.weight' in new_k:
                         print(f"Processing {new_k}")
                         splits = v.split(v.size(0) // num_shards, dim=0)
-
-
                     elif 'wo.weight' in new_k:
                         print(f"Processing {new_k}")
                         splits = v.split(v.size(1) // num_shards, dim=1)
-
                     elif 'wv.weight' in new_k:
                         print(f"Processing {new_k}")
                         splits = v.split(v.size(0) // num_shards, dim=0)
-
                     elif "wq.weight" in new_k or "wk.weight" in new_k:
                         print(f"Processing {new_k}")
                         v = unpermute(v)
@@ -181,7 +166,6 @@ def save_shards(model_sd, num_shards: int):
                     del splits
                 del model_sd[k], v
                 gc.collect()  # Effectively enforce garbage collection
-
             os.makedirs(output_dir, exist_ok=True)
             for i, new_state_dict in enumerate(new_state_dicts):
                 print(f"Saving shard {i + 1} of {num_shards} into {output_dir}/consolidated.0{i}.pth")
@@ -192,17 +176,14 @@ def save_shards(model_sd, num_shards: int):
 
 
 if __name__ == '__main__':
-
     args = parser.parse_args()
     base_model_path = args.base_model
     lora_model_paths = [s.strip() for s in args.lora_model.split(',') if len(s.strip()) != 0]
     output_dir = args.output_dir
     output_type = args.output_type
     offload_dir = args.offload_dir
-
     print(f"Base model: {base_model_path}")
     print(f"LoRA model(s) {lora_model_paths}:")
-
     if offload_dir is not None:
         # Load with offloading, which is useful for low-RAM machines.
         # Note that if you have enough RAM, please use original method instead, as it is faster.
@@ -223,13 +204,11 @@ if __name__ == '__main__':
             torch_dtype=torch.float16,
             device_map={"": "cpu"},
         )
-
     ## infer the model size from the checkpoint
     embedding_size = base_model.get_input_embeddings().weight.size(1)
     model_size = emb_to_model_size[embedding_size]
     print(f"Peft version: {peft.__version__}")
     print(f"Loading LoRA for {model_size} model")
-
     lora_model = None
     lora_model_sd = None
     for lora_index, lora_model_path in enumerate(lora_model_paths):
@@ -238,10 +217,8 @@ if __name__ == '__main__':
         if base_model.get_input_embeddings().weight.size(0) != len(tokenizer):
             base_model.resize_token_embeddings(len(tokenizer))
             print(f"Extended vocabulary size to {len(tokenizer)}")
-
         first_weight = base_model.model.layers[0].self_attn.q_proj.weight
         first_weight_old = first_weight.clone()
-
         if hasattr(peft.LoraModel, 'merge_and_unload'):
             lora_model = PeftModel.from_pretrained(
                 base_model,
@@ -260,18 +237,15 @@ if __name__ == '__main__':
                 print("Cannot find lora model on the disk. Downloading lora model from hub...")
                 filename = hf_hub_download(repo_id=lora_model_path, filename='adapter_model.bin')
                 lora_model_sd = torch.load(filename, map_location='cpu')
-
             lora_config = peft.LoraConfig.from_pretrained(lora_model_path)
             lora_scaling = lora_config.lora_alpha / lora_config.r
             fan_in_fan_out = lora_config.fan_in_fan_out
             lora_keys = [k for k in lora_model_sd if 'lora_A' in k]
             non_lora_keys = [k for k in lora_model_sd if not 'lora_' in k]
-
             for k in non_lora_keys:
                 print(f"merging {k}")
                 original_k = k.replace('base_model.model.', '')
                 base_model_sd[original_k].copy_(lora_model_sd[k])
-
             for k in lora_keys:
                 print(f"merging {k}")
                 original_key = k.replace('.lora_A', '').replace('base_model.model.', '')
@@ -283,21 +257,16 @@ if __name__ == '__main__':
                                   fan_in_fan_out) * lora_scaling
                 )
                 assert base_model_sd[original_key].dtype == torch.float16
-
         # did we do anything?
         assert not torch.allclose(first_weight_old, first_weight)
-
     tokenizer.save_pretrained(output_dir)
-
     if output_type == 'huggingface':
         print("Saving to Hugging Face format...")
         LlamaForCausalLM.save_pretrained(base_model, output_dir)  # , state_dict=deloreanized_sd)
     else:  # output_type=='pth
         print("Saving to pth format...")
-
         base_model_sd = base_model.state_dict()
         del lora_model, base_model, lora_model_sd
-
         params = params_of_models[model_size]
         num_shards = num_shards_of_models[model_size]
         n_layers = params["n_layers"]
@@ -306,5 +275,4 @@ if __name__ == '__main__':
         dims_per_head = dim // n_heads
         base = 10000.0
         inv_freq = 1.0 / (base ** (torch.arange(0, dims_per_head, 2).float() / dims_per_head))
-
         save_shards(model_sd=base_model_sd, num_shards=num_shards)

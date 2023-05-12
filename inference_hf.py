@@ -13,7 +13,6 @@ parser.add_argument('--data_file', default=None, type=str,
 parser.add_argument('--with_prompt', action='store_true')
 parser.add_argument('--interactive', action='store_true')
 args = parser.parse_args()
-
 generation_config = dict(
     temperature=0.2,
     top_k=40,
@@ -23,7 +22,6 @@ generation_config = dict(
     repetition_penalty=1.3,
     max_new_tokens=400
 )
-
 # The prompt template below is taken from llama.cpp
 # and is slightly different from the one used in training.
 # But we find it gives better results
@@ -32,7 +30,6 @@ prompt_input = (
     "Write a response that appropriately completes the request.\n\n"
     "### Instruction:\n\n{instruction}\n\n### Response:\n\n"
 )
-
 sample_data = ["为什么要减少污染，保护环境？"]
 
 
@@ -53,14 +50,12 @@ if __name__ == '__main__':
         if args.lora_model is None:
             args.tokenizer_path = args.base_model
     tokenizer = LlamaTokenizer.from_pretrained(args.tokenizer_path)
-
     base_model = LlamaForCausalLM.from_pretrained(
         args.base_model,
         load_in_8bit=False,
         torch_dtype=load_type,
         low_cpu_mem_usage=True,
     )
-
     model_vocab_size = base_model.get_input_embeddings().weight.size(0)
     tokenzier_vocab_size = len(tokenizer)
     print(f"Vocab of the base model: {model_vocab_size}")
@@ -74,7 +69,6 @@ if __name__ == '__main__':
         model = PeftModel.from_pretrained(base_model, args.lora_model, torch_dtype=load_type)
     else:
         model = base_model
-
     if device == torch.device('cpu'):
         model.float()
     # test data
@@ -86,10 +80,8 @@ if __name__ == '__main__':
         print("first 10 examples:")
         for example in examples[:10]:
             print(example)
-
     model.to(device)
     model.eval()
-
     with torch.no_grad():
         if args.interactive:
             print("Start inference with interactive mode.")
