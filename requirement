@@ -1,3 +1,3 @@
 # torch=1.13.1：https://pytorch.org/get-started/previous-versions/
-# pip install transformers sentencepiece -i https://pypi.doubanio.com/simple
+# pip install transformers==4.30.0 sentencepiece==0.1.97 -i https://pypi.doubanio.com/simple
 # pip install git+https://github.com/huggingface/peft

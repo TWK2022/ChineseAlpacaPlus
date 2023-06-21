@@ -10,13 +10,13 @@
 ### 项目介绍
 >本项目记录了在Linux上部署Chinese-Alpaca-Plus-7B和Chinese-Alpaca-Plus-13B模型的流程  
 >如果直接下载合并好的chinese_alpaca_plus_7b_hf模型(推荐)，可直接使用模型，详见(*，直接下载chinese_alpaca_plus_7b_hf或chinese_alpaca_plus_13b_hf)  
-### 1，环境：linux
+### 1.环境：linux
 >torch==1.12.0：https://pytorch.org/get-started/previous-versions/  
 >```
 >pip install transformers sentencepiece -i https://pypi.doubanio.com/simple
 >pip install git+https://github.com/huggingface/peft
 >```
-### 2，下载llama_7b_hf(13G)或llama_13b_hf(38G)
+### 2.下载llama_7b_hf(13G)或llama_13b_hf(38G)
 >llama_7b_hf(13G)地址：https://huggingface.co/decapoda-research/llama-7b-hf  
 >llama_13b_hf(G)地址：https://huggingface.co/decapoda-research/llama-13b-hf  
 >```
@@ -25,7 +25,7 @@
 >git clone https://huggingface.co/decapoda-research/llama-7b-hf：下载模型llama_7b_hf
 >git clone https://huggingface.co/decapoda-research/llama-13b-hf：下载模型llama_13b_hf
 >```
-### 3，下载chinese_llama_plus_lora_7b(790M)或chinese_llama_plus_lora_13b(1G)
+### 3.下载chinese_llama_plus_lora_7b(790M)或chinese_llama_plus_lora_13b(1G)
 >chinese_llama_plus_lora_7b：  
 >百度网盘：https://pan.baidu.com/s/1zvyX9FN-WSRDdrtMARxxfw?pwd=2gtr  
 >google网盘(外网)：https://drive.google.com/uc?id=1N97m3rBj-rp-J1X8rgRfluyomEscfAq0&export=download  
@@ -33,7 +33,7 @@
 >chinese_llama_plus_lora_13b：  
 >百度网盘：https://pan.baidu.com/s/1VGpNlrLx5zHuNzLOcTG-xw?pwd=8cvd  
 >google网盘(外网)：https://drive.google.com/uc?id=1q0L5Me_1j_9iiRRNfuEFUt3SOjQo3-g3&export=download  
-### 4，下载chinese_alpaca_plus_lora_7b(1.1G)或chinese_alpaca_plus_lora_13b(1.3G)
+### 4.下载chinese_alpaca_plus_lora_7b(1.1G)或chinese_alpaca_plus_lora_13b(1.3G)
 >chinese_alpaca_plus_lora_7b：  
 >百度网盘：https://pan.baidu.com/s/12tjjxmDWwLBM8Tj_7FAjHg?login_type=qzone&pwd=32hc&_at_=1683274834793  
 >google网盘(外网)：https://drive.google.com/uc?id=1EDcTmq6tDmRxqarpapdyDGBE9opY0zrB&export=download  
@@ -41,7 +41,7 @@
 >chinese_alpaca_plus_lora_13b：  
 >百度网盘：https://pan.baidu.com/s/1Mew4EjBlejWBBB6_WW6vig?pwd=mf5w  
 >google网盘(外网)：https://drive.google.com/uc?id=1CcLJvY7XsFAOjfSIqCpDI7jf3EEPDcEF&export=download  
-### 5，merge_model.py
+### 5.merge_model.py
 >合并llama_7b_hf、chinese_llama_plus_lora_7b、chinese_alpaca_plus_lora_7b为chinese_alpaca_plus_7b_hf  
 >合并llama_13b_hf、chinese_llama_plus_lora_13b、chinese_alpaca_plus_lora_13b为chinese_alpaca_plus_13b_hf  
 >```
@@ -49,7 +49,7 @@
 >python merge_model.py --base_model /TRAINING_CACHE/llama_13b_hf --lora_model /TRAINING_CACHE/chinese_llama_plus_lora_13b,/TRAINING_CACHE/chinese_alpaca_plus_lora_13b --output_type huggingface --output_dir /TRAINING_CACHE/chinese_alpaca_plus_13b_hf
 >--offload_dir cache：如果内存不够可使用缓存，命令中加上缓存路径
 >```
-### *，直接下载chinese_alpaca_plus_7b_hf(14G)或chinese_alpaca_plus_13b_hf(27G)
+### *.直接下载chinese_alpaca_plus_7b_hf(14G)或chinese_alpaca_plus_13b_hf(27G)
 >使用huggingface上别人合并好上传的chinese_alpaca_plus_7b/13b_hf模型，若不能使用，可以找找其他的或手动合并  
 >chinese_alpaca_plus_7b地址：https://huggingface.co/shibing624/chinese-alpaca-plus-7b  
 >chinese_alpaca_plus_13b地址：https://huggingface.co/shibing624/chinese-alpaca-plus-13b-hf  
@@ -59,7 +59,7 @@
 >git clone https://huggingface.co/shibing624/chinese-alpaca-plus-7b：下载模型chinese_alpaca_plus_7b_hf
 >git clone https://huggingface.co/shibing624/chinese-alpaca-plus-13b：下载模型chinese_alpaca_plus_13b_hf
 >```
-### 6，inference_hf.py
+### 6.inference_hf.py
 >启动模型  
 >交互式：  
 >```
